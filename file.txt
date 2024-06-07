@@ -1,0 +1,23 @@
+home-exchange/
+│
+├── controllers/
+│   ├── authController.js
+│   └── listingController.js
+│
+├── models/
+│   ├── User.js
+│   └── Listing.js
+│
+├── routes/
+│   ├── authRoutes.js
+│   └── listingRoutes.js
+│
+├── config/
+│   └── db.js
+│
+├── middleware/
+│   └── authMiddleware.js
+│
+├── .env
+├── app.js
+└── package.json
