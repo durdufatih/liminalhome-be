@@ -1,6 +1,6 @@
 // middleware/authMiddleware.js
 const jwt = require('jsonwebtoken');
-const User = require('../models/user'); // Corrected the file path casing to match the actual file name
+const User = require('../models/User'); // Corrected the file path casing to match the actual file name
 
 const protect = async (req, res, next) => {
     let token;
