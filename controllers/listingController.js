@@ -36,4 +36,13 @@ const getFilteredListings = async (req, res) => {
     }
 };
 
-module.exports = { createListing, getFilteredListings };
+const getUserListings = async (req, res) => {
+    try {
+        const userListings = await Listing.find({ user: req.user._id });
+        res.json(userListings);
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to retrieve user listings', error: error.message });
+    }
+};
+
+module.exports = { createListing, getFilteredListings, getUserListings };
