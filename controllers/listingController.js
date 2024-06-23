@@ -45,4 +45,43 @@ const getUserListings = async (req, res) => {
     }
 };
 
-module.exports = { createListing, getFilteredListings, getUserListings };
+const updateListing = async (req, res) => {
+    const { id } = req.params;
+    const { title, description, city, availableDates } = req.body;
+
+    try {
+        const updatedListing = await Listing.findByIdAndUpdate(id, {
+            title,
+            description,
+            city,
+            availableDates
+        }, { new: true }); // { new: true } option returns the updated document
+
+        if (!updatedListing) {
+            return res.status(404).json({ message: 'Listing not found' });
+        }
+
+        res.json(updatedListing);
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to update listing', error: error.message });
+    }
+};
+
+const deleteListing = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const deletedListing = await Listing.findByIdAndDelete(id);
+
+        if (!deletedListing) {
+            return res.status(404).json({ message: 'Listing not found' });
+        }
+
+        res.status(204).json(); // Returns 204 No Content on successful deletion
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to delete listing', error: error.message });
+    }
+};
+
+module.exports = { createListing, getFilteredListings, getUserListings, updateListing, deleteListing };
+
